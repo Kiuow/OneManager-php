@@ -1195,40 +1195,24 @@ function adminform($name = '', $pass = '', $storage = '', $path = '')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/186526/renexmoe-cdn@v1.3/css/app.css"><meta name="theme-color" content="#fff" />
 
 <body>
-    <div class="mdui-col-md-6 mdui-col-offset-md-3">
-  <br />
-  <center>
-    <div class="mdui-typo-title">
-      ' . getconstStr('InputPassword') . '
-      ' . $name . '
-    </div>
-
-  </center>
-
-  <form action="" method="post" onsubmit="return sha1loginpass(this);">
-  <div class="code-example">
+    <div class="code-example">
   <form action="" method="post" onsubmit="return sha1loginpass(this);">
-    <div class="mdui-textfield">
-  <i class="mdui-icon material-icons">account_circle</i
-      ><label class="mdui-textfield-label">用户名 </label>
-  <input class="mdui-textfield-input" type="text" disabled placeholder="Admin"/>
+    <div class="mdui-textfield mdui-textfield-disabled">
+  <i class="mdui-icon material-icons">account_circle</i><label class="mdui-textfield-label">用户名 </label>
+  <input class="mdui-textfield-input" type="text" disabled="" placeholder="Admin">
 </div>
-    <div class="mdui-textfield mdui-textfield-floating-label">
-      <i class="mdui-icon material-icons">https</i
-      ><label class="mdui-textfield-label">密码</label
-      ><input id="password1" name="password1" class="mdui-textfield-input" type="password"/><div class="mdui-textfield-helper"></div>
+    <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
+      <i class="mdui-icon material-icons">https</i><label class="mdui-textfield-label">密码</label><input id="password1" name="password1" class="mdui-textfield-input" type="password"><div class="mdui-textfield-helper"></div>
     </div>
-    <br />
-    <input name="timestamp" type="hidden"/>
+    <br>
+    <input name="timestamp" type="hidden">
 <div class="mdui-col-md-6 mdui-col-offset-md-3">
-  <br />
-    <button
-      class="mdui-center" style="background-color:transparent; border-style:none; border-radius: 20px"
-    >
-      <mwn-btn tertiary label="登录" tonal><mwn-icon icon="arrow_right"></mwn-icon></mwn-btn>
+  <br>
+    <button class="mdui-center" style="background-color:transparent; border-style:none; border-radius: 20px">
+      <mwn-btn tertiary="" label="登录" tonal=""><mwn-icon icon="arrow_right"></mwn-icon></mwn-btn>
   </button>
-  </form>
-  </div>
+  
+  </div></form>
 </div>
 </body>';
     $html .= '
