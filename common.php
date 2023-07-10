@@ -1194,26 +1194,111 @@ function adminform($name = '', $pass = '', $storage = '', $path = '')
     $html .= '
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/186526/renexmoe-cdn@v1.3/css/app.css"><meta name="theme-color" content="#fff" />
 
+<link rel="preconnect" href="https://fastly.jsdelivr.net" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/186526/renexmoe-cdn@v1.3/css/app.css"><meta name="theme-color" content="#fff" />
+    <link href="https://at.alicdn.com/t/font_3199908_1gft20osqqj.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://flyme.cf/mwn/src/mwn.css" />
+    <link rel="stylesheet" href="https://flyme.cf/mwn/docs/style1.css" />
+    <script type="module" src="https://flyme.cf/mwn/dist/mwn-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-one-dark.min.css" />
 <body>
-    <div class="code-example">
+    <div class="mdui-toolbar">
+  <a href="http://flyme.cf/pan/" class="mdui-btn mdui-btn-icon mdui-ripple mdui-ripple-white mdui-hidden-sm-up"><i class="mdui-icon iconfont icon-arrow-left"></i>
+  </a>
+  <a class="mdui-typo-headline">
+    登录
+  </a>
+  <div class="mdui-toolbar-spacer"></div>
+    <a href="javascript:void(0);"
+      onclick="renexmoe.toggle_theme();"
+    >
+    <i class="mdui-icon material-icons">brightness_6</i>
+    <a
+     href="javascript:history.go(-1)"
+    class="mdui-btn mdui-btn-icon mdui-ripple mdui-hidden-sm-up refresh"
+    ><i class="mdui-icon material-icons">refresh</i></a
+  >
+</div>
+  <div class="code-example">
   <form action="" method="post" onsubmit="return sha1loginpass(this);">
-    <div class="mdui-textfield mdui-textfield-disabled">
-  <i class="mdui-icon material-icons">account_circle</i><label class="mdui-textfield-label">用户名 </label>
-  <input class="mdui-textfield-input" type="text" disabled="" placeholder="Admin">
+    <div class="mdui-textfield">
+  <i class="mdui-icon material-icons">account_circle</i
+      ><label class="mdui-textfield-label">用户名 </label>
+  <input class="mdui-textfield-input" type="text" disabled placeholder="Admin"/>
 </div>
-    <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
-      <i class="mdui-icon material-icons">https</i><label class="mdui-textfield-label">密码</label><input id="password1" name="password1" class="mdui-textfield-input" type="password"><div class="mdui-textfield-helper"></div>
+    <div class="mdui-textfield mdui-textfield-floating-label">
+      <i class="mdui-icon material-icons">https</i
+      ><label class="mdui-textfield-label">密码</label
+      ><input id="password1" name="password1" class="mdui-textfield-input" type="password"/><div class="mdui-textfield-helper">' . $name . '</div>
     </div>
-    <br>
-    <input name="timestamp" type="hidden">
+    <br />
+    <input name="timestamp" type="hidden"/>
 <div class="mdui-col-md-6 mdui-col-offset-md-3">
-  <br>
-    <button class="mdui-center" style="background-color:transparent; border-style:none; border-radius: 20px">
-      <mwn-btn tertiary="" label="登录" tonal=""><mwn-icon icon="arrow_right"></mwn-icon></mwn-btn>
+  <br />
+    <button
+      class="mdui-center" style="background-color:transparent; border-style:none; border-radius: 20px"
+    >
+      <mwn-btn tertiary label="登录" tonal><mwn-icon icon="arrow_right"></mwn-icon></mwn-btn>
   </button>
-  
-  </div></form>
+  </form>
+  </div>
 </div>
+
+<div class="mdui-container">
+  <ul class="mdui-menu mdui-shadow-1" style="border-radius: 20px" id="admin-menu">
+  <li class="mdui-menu-item">
+    <a href="javascript:;" class="mdui-ripple back"
+      ><i class="iconfont icon-chevron-left"></i
+      >&nbsp;&nbsp;返回上一页</a
+    >
+  </li>
+  <li class="mdui-menu-item">
+    <a href="javascript:;" class="mdui-ripple refresh"
+      ><i class="iconfont icon-refresh-cw"></i
+      >&nbsp;&nbsp;刷新缓存</a
+    >
+  </li>
+  <li class="mdui-menu-item">
+    <a href="javascript:;" class="mdui-ripple back"
+      ><i class="iconfont icon-x-circle"></i
+      >&nbsp;&nbsp;记住密码</a
+    >
+  </li>
+  </ul>
+  <i id="mouseplace" style="position: absolute"></i>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/prism.min.js"></script>
+    <script>
+      var XHR = new XMLHttpRequest();
+      XHR.onreadystatechange = () => {
+        if (XHR.readyState == 4 && XHR.status == 200) {
+          document.querySelector(".main").content.scroll(0, 0);
+          document.querySelector(".main-content").innerHTML = XHR.responseText;
+          Prism.highlightAll();
+        }
+      };
+      var updateContent = (from, title) => {
+        XHR.open("GET", "./pages/" + from + ".html", true);
+        XHR.send();
+        document.querySelector(".page-title").innerHTML = title;
+      };
+      updateContent("home", "Material Web Native");
+
+      var toggleTheme = () => {
+        if (document.body.getAttribute("dark") != null) {
+          document.body.removeAttribute("dark");
+        } else {
+          document.body.setAttribute("dark", "");
+        }
+      };
+      document.querySelector(".toggle-theme-btn").addEventListener("click", toggleTheme, false);
+    </script>
+    <script src="https://fastly.jsdelivr.net/gh/186526/renexmoe-cdn@v1.3/js/app@1b381f3c.a4f2dc4618121eac37e2.js"></script><script src="https://fastly.jsdelivr.net/gh/186526/renexmoe-cdn@v1.3/js/app@28a13772.98a11cc0c1cf2495c3d8.js"></script><script src="https://fastly.jsdelivr.net/gh/186526/renexmoe-cdn@v1.3/js/app@34e3d95a.2f8dbf552095a86a7f1b.js"></script><script src="https://fastly.jsdelivr.net/gh/186526/renexmoe-cdn@v1.3/js/app@798ab416.9ed46bb752b71a3c13a4.js"></script><script src="https://fastly.jsdelivr.net/gh/186526/renexmoe-cdn@v1.3/js/app@9c50beac.30955a99f08c9574cd14.js"></script><script src="https://fastly.jsdelivr.net/gh/186526/renexmoe-cdn@v1.3/js/app@f0256996.956ea71aa357ba3fdc28.js"></script><script src="https://fastly.jsdelivr.net/gh/186526/renexmoe-cdn@v1.3/js/webpack-runtime.93708ab3e9cb84dcc01a.js"></script>
 </body>';
     $html .= '
 <script>
